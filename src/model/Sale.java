@@ -1,42 +1,57 @@
 package model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-public class Sale {
-	String client;
-	Product[] products;
-	double amount;
-	
-	
-	public Sale(String client, Product[] products, double amount) {
+public class Sale{
+	Client client;
+	//Product[] products;
+	//Lo cambiamos los ArrayList
+	ArrayList<Product> products; 
+	Amount amount;
+	String almacenarFechas;
+
+	 
+	// public Sale(String client, Product[] products, double amount)
+	//Cambiamos el Product[] products por el ArrayList <String> products
+	public Sale(String client, ArrayList<Product> products, Amount amount,String almacenarFechas){
 		super();
-		this.client = client;
+		this.client = new Client(client);
 		this.products = products;
 		this.amount = amount;
+		this.almacenarFechas=almacenarFechas;
 	}
 	
-	public String getClient() {
+	public Client getClient() {
 		return client;
 	}
-	public void setClient(String client) {
+	public void setClient(Client client) {
 		this.client = client;
 	}
-	public Product[] getProducts() {
+	//Cambiamos el array Product[] products por el ArrayList <String> products
+	public ArrayList<Product> getProducts() {
 		return products;
 	}
-	public void setProducts(Product[] products) {
+	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
-	public double getAmount() {
+	public Amount getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(Amount amount) {
 		this.amount = amount;
+	}
+	public String getAlmacenarFechas() {
+		return almacenarFechas;
+	}
+	public void getAlmacenarFechas(String almacenarFechas) {
+		this.almacenarFechas = almacenarFechas;
 	}
 
 	@Override
+	//Para que nos de la información de sale.toString()
 	public String toString() {
-		return "Sale [client=" + client + ", products=" + Arrays.toString(products) + ", amount=" + amount + "]";
+		//Quitamos el toSting() y solamente le ponemos el nombre.
+		return "Sale [client=" + client + ", products=" + products + ", amount=" + amount + ", Fecha y hora= "+ almacenarFechas+ "]";
 	}
 	
 	

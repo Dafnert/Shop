@@ -1,0 +1,4 @@
+0Client: da; Date=22-03-2024 11:18:20
+
+0;Product: Manzana,20.0
+0;Amount: 20.8

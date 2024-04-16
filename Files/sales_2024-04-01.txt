@@ -1,0 +1,8 @@
+0Client: da; Date=01-04-2024 19:48:18
+
+0;Product: Manzana,20.0
+0;Amount: 20.8€
+0Client: da; Date=01-04-2024 19:48:18
+
+0;Product: Manzana,20.0Fresa,10.0
+0;Amount: 20.8€
