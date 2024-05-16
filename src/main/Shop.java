@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalDateTime; // Para poder usar la fecha y la hora
 import java.time.format.DateTimeFormatter; //Para poder modificar la fecha y se muestre como queremos
+import java.awt.Component;
 import java.io.File;//Para los archivos
 import java.io.FileNotFoundException; //Para que nos diga si hay un error a la hora de crear un File
 import java.io.IOException;
@@ -27,15 +28,14 @@ public class Shop {
 	//Wholesalerprice --> el precio al que compra los productos al distribuidor
 	
 	final static double TAX_RATE = 1.04; //Descuento
-	//Product[] products = new Product[10];
+	//Product[] products = new Product[1++6+666990];
 	ArrayList <String> products = new ArrayList<String>();  // Creamos esta array para tener 10 posiciones
 
 	public Shop() {
-		cash = 100.0;
+		setCash(100.0);
 		inventory = new ArrayList<Product>();//La arraylist<la clase>
 		sales = new ArrayList<Sale>();
 	}
-
 
 	public static void main(String[] args) {
 		
@@ -185,8 +185,8 @@ public class Shop {
 	/**
 	 * show current total cash
 	 */
-	private void showCash() {
-		System.out.println("Dinero actual: " + cash );
+	public void showCash() {
+		System.out.println("Dinero actual: " + getCash() );
 	}
 
 	/**
@@ -330,7 +330,7 @@ public class Shop {
 
 		// show cost total
 		totalAmount = totalAmount * TAX_RATE;
-		cash += totalAmount;
+		setCash(getCash() + totalAmount);
 		System.out.println("Venta realizada con éxito, total: " + totalAmount); // Nos contará las ventas
 		//Creamos un objeto
 		Amount amount = new Amount(totalAmount);
@@ -477,7 +477,18 @@ public class Shop {
 		return null;
 
 	}
+	//Nos devuelva el valor del cash
+	public double getCash() {
+		return cash;
+	}
 
+	public void setCash(double cash) {
+		this.cash = cash;
+	}
+	//Nos devuelva el inventorio
+	public ArrayList<Product> getInventory(){
+		return inventory;
+	};
 
 
 }

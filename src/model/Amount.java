@@ -27,7 +27,7 @@ public class Amount {
 
 	@Override
 	public String toString() {
-		return "Amount [value=" + value + currency + "]";
+		return  value + currency;
 	}
 	
 
