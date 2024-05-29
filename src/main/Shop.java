@@ -13,6 +13,7 @@ import java.io.File;//Para los archivos
 import java.io.FileNotFoundException; //Para que nos diga si hay un error a la hora de crear un File
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
@@ -37,7 +38,7 @@ public class Shop {
 		sales = new ArrayList<Sale>();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		
 		Employee employee = new Employee(); //Crear un objeto
 		Shop shop = new Shop();
@@ -114,7 +115,7 @@ public class Shop {
 
 	}
 //Creamos este metodo para que cuando el usuario haga bien el nñumero y la contraseña pueda ver el login.
-	public void initSession() {
+	public void initSession() throws SQLException {
 		Employee employee = new Employee();
 		Scanner scanner = new Scanner(System.in);
 		int user = 0;

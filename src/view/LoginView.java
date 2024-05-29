@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -86,30 +88,39 @@ public class LoginView extends JFrame implements ActionListener{
 		        int numberEmployee = Integer.parseInt(numeroEmpleado.getText());
 		        String pass = password.getText();
 		        
-		        if (employee.login(numberEmployee, pass)) {
-		            ShopView shopView = new ShopView(); // Crear un nuevo JFrame para la tienda
-		            shopView.setVisible(true);
-		            dispose(); // Cerrar el formulario de inicio de sesión
-		        } else {
-		        	//Contamos los intentos 
-		            attempts++;
-		            //Si supera más de 3 intentos saldrá el mensaje del JOptionPane
-		            if (attempts >= Constants.MAX_LOGIN_TIMES) {
-		                JOptionPane.showMessageDialog(null,
-		                        "Error login, superados los 3 intentos",
-		                        "Error",
-		                        JOptionPane.ERROR_MESSAGE);
-		                dispose();
-		            } else {
-		            	//Para que el usuario sepa que tiene algún dato mal
-		                JOptionPane.showMessageDialog(null,
-		                        "Usuario o contraseña incorrectos, intento " + attempts,
-		                        "Error",
-		                        JOptionPane.ERROR_MESSAGE);
-		            }
-		            //Ponemos el método para que se limpien los campos del form
-		            limpiarCampo();
-	                }
+		        try {
+					if (employee.login(numberEmployee, pass)) {
+					    ShopView shopView = new ShopView(); // Crear un nuevo JFrame para la tienda
+					    shopView.setVisible(true);
+					    dispose(); // Cerrar el formulario de inicio de sesión
+					} else {
+						//Contamos los intentos 
+					    attempts++;
+					    //Si supera más de 3 intentos saldrá el mensaje del JOptionPane
+					    if (attempts >= Constants.MAX_LOGIN_TIMES) {
+					        JOptionPane.showMessageDialog(null,
+					                "Error login, superados los 3 intentos",
+					                "Error",
+					                JOptionPane.ERROR_MESSAGE);
+					        dispose();
+					    } else {
+					    	//Para que el usuario sepa que tiene algún dato mal
+					        JOptionPane.showMessageDialog(null,
+					                "Usuario o contraseña incorrectos, intento " + attempts,
+					                "Error",
+					                JOptionPane.ERROR_MESSAGE);
+					    }
+					    //Ponemos el método para que se limpien los campos del form
+					    limpiarCampo();
+					    }
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println(e1.getMessage());
+					e1.printStackTrace();
+				}
 	                
 		    	
 		    }
