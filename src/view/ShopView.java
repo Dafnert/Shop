@@ -11,7 +11,7 @@ import utils.Constants;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -87,39 +87,39 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		lblNewLabel.setBounds(41, 99, 249, 256);
 		contentPane.add(lblNewLabel);
 		
-		JButton cajaContar = new JButton("1. Contar caja");
-		cajaContar.setFont(new Font("Footlight MT Light", Font.PLAIN, 17));
-		cajaContar.setForeground(new Color(54, 86, 105));
-		cajaContar.setBackground(new Color(108, 152, 179));
-		cajaContar.setBounds(389, 114, 174, 31);
-		contentPane.add(cajaContar);
-		cajaContar.addActionListener(this);
-		cajaContar.setActionCommand("cajaContar");
+		JButton inventory = new JButton("0. Export inventory");
+		inventory.setFont(new Font("Footlight MT Light", Font.PLAIN, 17));
+		inventory.setForeground(new Color(54, 86, 105));
+		inventory.setBackground(new Color(108, 152, 179));
+		inventory.setBounds(399, 154, 174, 31);
+		contentPane.add(inventory);
+		inventory.addActionListener(this);
+		inventory.setActionCommand("inventory");
 			   
 		
-		JButton stockAdd = new JButton("3. Añadir Stock");
+		JButton stockAdd = new JButton("3. Add Stock");
 		stockAdd.setForeground(new Color(54, 86, 105));
 		stockAdd.setFont(new Font("Footlight MT Light", Font.PLAIN, 17));
 		stockAdd.setBackground(new Color(108, 152, 179));
-		stockAdd.setBounds(389, 242, 174, 31);
+		stockAdd.setBounds(399, 277, 174, 31);
 		contentPane.add(stockAdd);
 		stockAdd.addActionListener(this);
 		stockAdd.setActionCommand("stockAdd");
 		
-		JButton productAdd = new JButton("2. Añadir Producto");
+		JButton productAdd = new JButton("2. Add Product");
 		productAdd.setForeground(new Color(54, 86, 105));
 		productAdd.setFont(new Font("Footlight MT Light", Font.PLAIN, 17));
 		productAdd.setBackground(new Color(108, 152, 179));
-		productAdd.setBounds(389, 177, 174, 31);
+		productAdd.setBounds(399, 236, 174, 31);
 		contentPane.add(productAdd);
 		productAdd.addActionListener(this);
 		productAdd.setActionCommand("productAdd");
 		
-		JButton productDelete = new JButton("9. Eliminar Producto");
+		JButton productDelete = new JButton("9. Delete Product");
 		productDelete.setForeground(new Color(54, 86, 105));
 		productDelete.setFont(new Font("Footlight MT Light", Font.PLAIN, 17));
 		productDelete.setBackground(new Color(108, 152, 179));
-		productDelete.setBounds(389, 305, 174, 31);
+		productDelete.setBounds(399, 318, 174, 31);
 		contentPane.add(productDelete);
 		productDelete.addActionListener(this);
 		productDelete.setActionCommand("productDelete");
@@ -130,6 +130,14 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		textField.setBounds(0, 0, 612, 74);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		
+		JButton cajaContar_1 = new JButton("1. Count Cash");
+		cajaContar_1.setForeground(new Color(54, 86, 105));
+		cajaContar_1.setFont(new Font("Footlight MT Light", Font.PLAIN, 17));
+		cajaContar_1.setBackground(new Color(108, 152, 179));
+		cajaContar_1.setActionCommand("cajaContar");
+		cajaContar_1.setBounds(399, 195, 174, 31);
+		contentPane.add(cajaContar_1);
 	}
 
 	@Override
@@ -141,21 +149,28 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 	@Override
 	//Creamos el menú para las teclas
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		//Cuando el user tecleé un número se habrá al ventana que quiere
-          if (e.getKeyChar()== KeyEvent.VK_1){
+		 if (e.getKeyCode()== KeyEvent.VK_0){
+			 try {
+		            shop.writeInventory();
+		            JOptionPane.showMessageDialog(this, "Inventario exportado correctamente.", "Confirmaci�n", JOptionPane.INFORMATION_MESSAGE);
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(this, "Error al exportar inventario.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+         }  
+		if (e.getKeyChar()== KeyEvent.VK_1){
         	  this.openCashView();
           }
           if (e.getKeyChar()== KeyEvent.VK_2){
-        	  setTitle("Añadir Producto");
+        	  setTitle("Add Product");
         	  this.openProductView(2, shop);
           }
           if(e.getKeyChar()== KeyEvent.VK_3) {
-        	  setTitle("Añadir Stock");
+        	  setTitle("Add Stock");
         	  this.openProductView(3, shop);
           }
           if(e.getKeyChar()== KeyEvent.VK_9) {
-				setTitle("Eliminar Producto");
+				setTitle("Delete Product");
 				 this.openProductView(9, shop);
           }
 	}
@@ -172,20 +187,29 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		// TODO Auto-generated method stub
 		 String comando = e.getActionCommand();
 	        switch (comando) {
+	        
 	            case "cajaContar":
 	                openCashView();
 	                break;
 	            case "productAdd":
-	                setTitle("Añadir Producto");
+	                setTitle("Add Product");
 	                openProductView(2,shop);
 	                break;
 	            case "stockAdd":
-	            	setTitle("Añadir Stock");
+	            	setTitle("Add Stock");
 	            	openProductView(3,shop);
 	            	break;
 	            case "productDelete":
-	                setTitle("Eliminar Producto");
+	                setTitle("Delete Product");
 	                openProductView(9,shop);
+	                break;
+	            case "inventory":
+	            	 try {
+	            	        shop.writeInventory();
+	            	        JOptionPane.showMessageDialog(this, "Inventario exportado correctamente.", "Confirmaci�n", JOptionPane.INFORMATION_MESSAGE);
+	            	    } catch (IOException ex) {
+	            	        JOptionPane.showMessageDialog(this, "Error al exportar inventario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	            	    }
 	                break;
 	        }	
 	}
@@ -200,6 +224,8 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		ProductView productView = new ProductView(option, shop);
 		productView.setVisible(true);
 	}
-	
-	
+	public void openFile(int option, Shop shop) throws IOException {
+		
+		shop.writeInventory();
+		}
 }

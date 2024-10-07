@@ -152,7 +152,7 @@ public class LoginView extends JFrame implements ActionListener{
 		
 		txtNumEmpleado = new JTextPane();
 		txtNumEmpleado.setEditable(false);
-		txtNumEmpleado.setText("Número de empleado:");
+		txtNumEmpleado.setText("Number employee");
 		txtNumEmpleado.setForeground(new Color(52, 103, 124));
 		txtNumEmpleado.setFont(new Font("Georgia Pro Cond", Font.PLAIN, 17));
 		txtNumEmpleado.setBackground(new Color(173, 194, 209));

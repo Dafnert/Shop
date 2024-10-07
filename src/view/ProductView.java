@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -148,6 +149,24 @@ public class ProductView extends JDialog implements ActionListener{
 						                        "Error",
 						                        JOptionPane.ERROR_MESSAGE);
 									}
+							}
+							if(option==Constants.OPTION_EXPORT_INVENTORY){
+								try {
+									shop.writeInventory();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								JOptionPane.showMessageDialog(null,
+				                        "Producto eliminado",
+				                        "",
+				                        JOptionPane.INFORMATION_MESSAGE);	
+								dispose();
+							}else {
+								JOptionPane.showMessageDialog(null,
+				                        "El producto no se ha eliminado",
+				                        "Error",
+				                        JOptionPane.ERROR_MESSAGE);
 							}
 							dispose();
 							}

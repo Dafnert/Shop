@@ -19,23 +19,30 @@ import java.io.FileWriter;
 
 import model.Sale;
 import java.util.Scanner;
+
+import dao.Dao;
+import dao.DaoImplFile;
 // COPIA
 public class Shop {
 	private double cash = 100.00;
+	//private DaoImplFile dao;
 	private ArrayList<Product> inventory; //La arraylist<la clase>
 	private int numberProducts;
+	private DaoImplFile dao=new DaoImplFile();
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
-	//Wholesalerprice --> el precio al que compra los productos al distribuidor
+	//Wholesalerprice --> el price al que compra los productos al distribuidor
 	
-	final static double TAX_RATE = 1.04; //Descuento
-	//Product[] products = new Product[1++6+666990];
+	final static double TAX_RATE = 1.04; //Discount
+	//Product[] products = new Product[];
 	ArrayList <String> products = new ArrayList<String>();  // Creamos esta array para tener 10 posiciones
 
 	public Shop() {
 		setCash(100.0);
 		inventory = new ArrayList<Product>();//La arraylist<la clase>
 		sales = new ArrayList<Sale>();
+		//Assignar a atributo dao un objeto del constructor DaoImplFile
+		
 	}
 
 	public static void main(String[] args) throws SQLException {
@@ -48,7 +55,7 @@ public class Shop {
 		Scanner scanner = new Scanner(System.in);
 		int opcion = 0;
 		boolean exit = false;
-
+		//Dao dao = new Dao();
 	//LLamamos la método
 		shop.initSession();
 		
@@ -136,8 +143,11 @@ public class Shop {
 	/**
 	 * load initial inventory to shop
 	 */
-	public void loadInventory() {		            
-	    try {
+	public void loadInventory() {	
+		this.inventory=dao.getInventory();
+		
+		
+		/* try {
 	        File file = new File("Files/inputInventory.txt");
 	        Scanner myReader = new Scanner(file);
 	        double wholesalerPrice = 0;
@@ -172,7 +182,7 @@ public class Shop {
 	    } catch (FileNotFoundException e) {
 	        System.out.println("An error occurred.");
 	        e.printStackTrace();
-	    }
+	    }*/
 	}
 		
 	
@@ -356,13 +366,11 @@ public class Shop {
 	 * show all sales
 	 */
 	private void showSales() {
-        LocalDate date = LocalDate.now(); //yyyy-MM-dd
+		dao.writeInventory();
+		
+		//LocalDate date = LocalDate.now(); //yyyy-MM-dd
         /**System.out.println("Lista de ventas:");
-        for (Sale sale : sales) {
-            if (sale != null) {
-                System.out.println(sale.toString());
-            }
-        }*/
+      
         Scanner scanner = new Scanner(System.in);
         System.out.println("Quieres crear un fichero?\n" + 
         "1)Sí\n"+
@@ -416,7 +424,7 @@ public class Shop {
         default:
         	System.out.println("Not options");
         	break;
-        }
+        }*/
        }
 	
 	private void totalSale() {
@@ -490,6 +498,25 @@ public class Shop {
 	public ArrayList<Product> getInventory(){
 		return inventory;
 	};
-
+	public ArrayList<Product> setInventory(ArrayList<Product> arrayList) {
+		return inventory;
+	};
+	  // Get dao 
+    public DaoImplFile getDao() {
+        return dao;
+    }
+    
+    // Set dao 
+    public void setDao(DaoImplFile dao) {
+        this.dao = dao;
+    }
+    public boolean writeInventory()throws IOException{
+    	
+    	return dao.writeInventory(this.inventory);
+		
+    }
+    public void readInventrory() {
+    	this.setInventory(dao.getInventory());
+    }
 
 }
