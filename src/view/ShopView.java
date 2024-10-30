@@ -7,11 +7,13 @@ import javax.swing.border.EmptyBorder;
 
 import main.Shop;
 import model.Employee;
+import model.Product;
 import utils.Constants;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -32,6 +34,7 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 	private JPanel contentPane;
 	private JTextField textField;
 	private Shop shop;
+	ArrayList <Product> products;
 
 	/**
 	 * Launch the application.
@@ -83,7 +86,7 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		contentPane.add(txtpnSeleccioneOPulse);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\dafne\\OneDrive\\Escritorio\\3110602.png"));
+		//lblNewLabel.setIcon(new ImageIcon("C:\\Users\\dafne\\OneDrive\\Escritorio\\3110602.png"));
 		lblNewLabel.setBounds(41, 99, 249, 256);
 		contentPane.add(lblNewLabel);
 		
@@ -152,7 +155,7 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		//Cuando el user tecle√© un n√∫mero se habr√° al ventana que quiere
 		 if (e.getKeyCode()== KeyEvent.VK_0){
 			 try {
-		            shop.writeInventory();
+		           shop.writeInventory(products);
 		            JOptionPane.showMessageDialog(this, "Inventario exportado correctamente.", "ConfirmaciÛn", JOptionPane.INFORMATION_MESSAGE);
 		        } catch (Exception ex) {
 		            JOptionPane.showMessageDialog(this, "Error al exportar inventario.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -205,7 +208,7 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 	                break;
 	            case "inventory":
 	            	 try {
-	            	        shop.writeInventory();
+	            	        shop.writeInventory(products);
 	            	        JOptionPane.showMessageDialog(this, "Inventario exportado correctamente.", "ConfirmaciÛn", JOptionPane.INFORMATION_MESSAGE);
 	            	    } catch (IOException ex) {
 	            	        JOptionPane.showMessageDialog(this, "Error al exportar inventario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -224,8 +227,8 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		ProductView productView = new ProductView(option, shop);
 		productView.setVisible(true);
 	}
-	public void openFile(int option, Shop shop) throws IOException {
+	public void openFile(int option, Shop shop, ArrayList <Product> products) throws IOException {
 		
-		shop.writeInventory();
+		shop.writeInventory(products);
 		}
 }

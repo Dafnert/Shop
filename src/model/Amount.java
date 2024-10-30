@@ -2,7 +2,7 @@ package model;
 //Creamos la clase para poder usarla en nuestra actividad de UF4
 public class Amount {
 	private double value;
-	private String currency="â‚¬";
+	private String currency="€";
 	
 	public Amount(double value) {
 		super();

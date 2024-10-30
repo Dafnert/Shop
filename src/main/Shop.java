@@ -22,13 +22,15 @@ import java.util.Scanner;
 
 import dao.Dao;
 import dao.DaoImplFile;
+import dao.DaoImplXml;
 // COPIA
 public class Shop {
 	private double cash = 100.00;
 	//private DaoImplFile dao;
 	private ArrayList<Product> inventory; //La arraylist<la clase>
 	private int numberProducts;
-	private DaoImplFile dao=new DaoImplFile();
+	//private DaoImplFile dao=new DaoImplFile();
+	private DaoImplXml dao=new DaoImplXml();
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
 	//Wholesalerprice --> el price al que compra los productos al distribuidor
@@ -45,11 +47,11 @@ public class Shop {
 		
 	}
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 		
 		Employee employee = new Employee(); //Crear un objeto
 		Shop shop = new Shop();
-
+		
 		shop.loadInventory();
 
 		Scanner scanner = new Scanner(System.in);
@@ -145,7 +147,7 @@ public class Shop {
 	 */
 	public void loadInventory() {	
 		this.inventory=dao.getInventory();
-		
+		System.out.println(inventory.toString());
 		
 		/* try {
 	        File file = new File("Files/inputInventory.txt");
@@ -364,9 +366,11 @@ public class Shop {
 
 	/**
 	 * show all sales
+	 * @throws IOException 
 	 */
-	private void showSales() {
-		dao.writeInventory();
+	private void showSales() throws IOException {
+		//System.out.println(inventory.toString());
+		dao.writeInventory(inventory);
 		
 		//LocalDate date = LocalDate.now(); //yyyy-MM-dd
         /**System.out.println("Lista de ventas:");
@@ -502,21 +506,22 @@ public class Shop {
 		return inventory;
 	};
 	  // Get dao 
-    public DaoImplFile getDao() {
+    public DaoImplXml getDao() {
         return dao;
     }
     
     // Set dao 
-    public void setDao(DaoImplFile dao) {
+    public void setDao(DaoImplXml dao) {
         this.dao = dao;
     }
-    public boolean writeInventory()throws IOException{
+    public boolean writeInventory(ArrayList<Product> products)throws IOException{
     	
-    	return dao.writeInventory(this.inventory);
+    	return dao.writeInventory(inventory);
 		
     }
     public void readInventrory() {
     	this.setInventory(dao.getInventory());
     }
+
 
 }

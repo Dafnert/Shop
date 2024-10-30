@@ -60,7 +60,7 @@ private Connection connection;
 	}
 
 	@Override
-	public boolean writeInventory() {
+	public boolean writeInventory(ArrayList<Product>inventory) {
 		// TODO Auto-generated method stub
 		return false;
 	}

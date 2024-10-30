@@ -112,11 +112,6 @@ public class DaoImplFile implements Dao{
     		}
 	    return false;
 	}
-
-	@Override
-	public boolean writeInventory() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

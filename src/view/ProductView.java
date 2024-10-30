@@ -152,7 +152,7 @@ public class ProductView extends JDialog implements ActionListener{
 							}
 							if(option==Constants.OPTION_EXPORT_INVENTORY){
 								try {
-									shop.writeInventory();
+									shop.writeInventory(inventory);
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();

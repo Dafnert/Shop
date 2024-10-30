@@ -20,5 +20,7 @@ public interface Dao {
 	
 	public ArrayList<Product> getInventory();
 	
-	public boolean writeInventory()throws IOException;
+	public boolean writeInventory(ArrayList<Product> inventory)throws IOException;
+
+	
 }
