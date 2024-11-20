@@ -59,21 +59,6 @@ public class DaoImplXml implements Dao{
 		return products;
 	
 	}
-	/**SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-	SAXParser saxParser = saxParserFactory.newSAXParser();
-	File file =new File("inputInventory.xml");
-	VersionesHandler handler =new VersionHandler();
-	saxParser.parse(file,handler);
-	//ArrayList <Product> products = handler.get;
-	return null;*/
-
-	@Override
-	/*public boolean writeInventory() throws IOException {
-		GeneradorDOM generadorDOM =new GeneradorDOM();
-		generadorDOM.generateXml();
-		generadorDOM.generateDocument();
-		return false;
-	}*/
     public boolean writeInventory(ArrayList<Product> products) throws IOException {
 		DomWriter domWriter = new DomWriter();
         try {
