@@ -54,7 +54,7 @@ public class DomWriter {
 			name.appendChild(document.createTextNode(String.valueOf(producto.getName())));
 			productsDom.appendChild(name);
 	       //Price
-	       Element wholesalerPrice = document.createElement("wholesalerPrice");
+	       Element wholesalerPrice = document.createElement("price");
 	        wholesalerPrice.setAttribute("currency", "€");
 	        wholesalerPrice.appendChild(document.createTextNode(String.valueOf(producto.getWholesalerPrice().getValue())));
 	        productsDom.appendChild(wholesalerPrice);
