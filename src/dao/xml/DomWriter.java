@@ -68,7 +68,7 @@ public class DomWriter {
 			Transformer transformer = factory.newTransformer();
 			
 			Source source = new DOMSource(document);
-			File file = new File ("xml/inventory" + date +".xml");
+			File file = new File ("xml/inventory_" + date +".xml");
 			FileWriter fw = new FileWriter(file);
 			PrintWriter pw = new PrintWriter(fw);
 			Result result = new StreamResult(pw);
