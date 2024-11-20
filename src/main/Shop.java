@@ -22,6 +22,7 @@ import java.util.Scanner;
 
 import dao.Dao;
 import dao.DaoImplFile;
+import dao.DaoImplJaxb;
 import dao.DaoImplXml;
 // COPIA
 public class Shop {
@@ -31,6 +32,7 @@ public class Shop {
 	private int numberProducts;
 	//private DaoImplFile dao=new DaoImplFile();
 	private DaoImplXml dao=new DaoImplXml();
+	//private DaoImplJaxb dao=new DaoImplJaxb();
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
 	//Wholesalerprice --> el price al que compra los productos al distribuidor
@@ -147,7 +149,7 @@ public class Shop {
 	 */
 	public void loadInventory() {	
 		this.inventory=dao.getInventory();
-		System.out.println(inventory.toString());
+		//System.out.println(inventory.toString());
 		
 		/* try {
 	        File file = new File("Files/inputInventory.txt");
