@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<products>
+<products total="2">
 	<product name="Manzana">
 		<wholesalerPrice currency="�">10.0</wholesalerPrice>
 		<stock>10</stock>

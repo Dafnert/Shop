@@ -228,7 +228,7 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		productView.setVisible(true);
 	}
 	public void openFile(int option, Shop shop, ArrayList <Product> products) throws IOException {
-		
 		shop.writeInventory(products);
-		}
+
+	}
 }
