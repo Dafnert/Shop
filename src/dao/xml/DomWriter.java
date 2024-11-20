@@ -44,10 +44,14 @@ public class DomWriter {
 		document.appendChild(product);
 		
 		for (Product producto: products) {
-			//Name
+			//Id
 			Element productsDom = document.createElement("product");
-			productsDom.setAttribute("name", producto.getName());
+			productsDom.setAttribute("id", String.valueOf(producto.getId()));
 	        product.appendChild(productsDom);
+			//Name
+			Element name = document.createElement("name");
+			name.appendChild(document.createTextNode(String.valueOf(producto.getName())));
+			productsDom.appendChild(name);
 	       //Price
 	       Element wholesalerPrice = document.createElement("wholesalerPrice");
 	        wholesalerPrice.setAttribute("currency", "€");
