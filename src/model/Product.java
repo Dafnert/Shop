@@ -10,13 +10,13 @@ import javax.xml.bind.annotation.XmlType;
 import model.Amount;
 
 @XmlRootElement(name="product")
-@XmlType(propOrder = {"name", "publicPrice", "wholesalerPrice", "stock"}) 
+@XmlType(propOrder = {"totalProducts", "name","available", "wholesalerPrice","publicPrice", "stock"}) 
 public class Product {
 	private int id;
     private String name;
     private Amount publicPrice;
     private Amount wholesalerPrice;
-    private boolean available;
+    private boolean available = true;
     private int stock;
     private static int totalProducts;
     
@@ -38,6 +38,8 @@ public class Product {
 		this.stock = stock;
 	}
 	public Product() {
+		super();
+		this.id =++totalProducts;
 	
 	}; 
 	@XmlAttribute(name="id")
@@ -71,8 +73,9 @@ public class Product {
 
 	public void setWholesalerPrice(Amount wholesalerPrice) {
 		this.wholesalerPrice = wholesalerPrice;
+		this.publicPrice = new Amount(wholesalerPrice.getValue()*2);
 	}
-	@XmlAttribute(name="available")
+	@XmlElement(name="available")
 	public boolean isAvailable() {
 		return available;
 	}
@@ -89,11 +92,11 @@ public class Product {
 		this.stock = stock;
 	}
 
-	public static int getTotalProducts() {
+	public int getTotalProducts() {
 		return totalProducts;
 	}
 
-	public static void setTotalProducts(int totalProducts) {
+	public void setTotalProducts(int totalProducts) {
 		Product.totalProducts = totalProducts;
 	}
 

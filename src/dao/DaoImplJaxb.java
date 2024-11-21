@@ -33,15 +33,15 @@ public class DaoImplJaxb implements Dao{
 	public ArrayList<Product> getInventory() {
 		ArrayList<Product> products = new ArrayList<>();
 		// from xml2java
-		(new JaxbUnMarshaller()).init();
+		products = (new JaxbUnMarshaller()).init();
 		return products;
 	}
 
 	@Override
-	public boolean writeInventory(ArrayList<Product> inventory) throws IOException {
+	public boolean writeInventory(ArrayList<Product> products) throws IOException {
 		// from java2xml
-		(new JaxbMarshaller()).init(inventory);
-		return false;
+		(new JaxbMarshaller()).init(products);
+		return true;
 	}
 	
 }

@@ -11,15 +11,17 @@ import model.Product;
 import model.ProductList;
 
 public class JaxbUnMarshaller {
-	public void init() {
+
+	public ArrayList<Product> init() {
 		// read from xml to java object
 		ProductList products = null;
+		ArrayList<Product> product = new ArrayList<>();
 		try {
 			JAXBContext context = JAXBContext.newInstance(ProductList.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			System.out.println("unmarshalling...");
 			products = (ProductList) unmarshaller.unmarshal(new File("xml/inputInventory.xml"));
-			} catch (JAXBException e) {
+		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 
@@ -29,7 +31,9 @@ public class JaxbUnMarshaller {
 		else {
 			for (Product p : products.getProducts()) {
 				System.out.println(p);
+				product.add(p);
 			}
 		}
+		return product;
 	}
 }

@@ -31,8 +31,9 @@ public class Shop {
 	private ArrayList<Product> inventory; //La arraylist<la clase>
 	private int numberProducts;
 	//private DaoImplFile dao=new DaoImplFile();
-	private DaoImplXml dao=new DaoImplXml();
-	//private DaoImplJaxb dao=new DaoImplJaxb();
+	/*DomWriter y SaxReades*/
+	//private DaoImplXml dao=new DaoImplXml();
+	private DaoImplJaxb dao=new DaoImplJaxb();
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
 	//Wholesalerprice --> el price al que compra los productos al distribuidor
@@ -288,7 +289,7 @@ public class Shop {
 		System.out.println("Contenido actual de la tienda:");
 		for (Product product : inventory) { //Cambiamos un String por la clase Product
 			if (product != null) {
-				System.out.println(product.toString()); //Le ponemos  .toString para que nos de toda la infromación
+				System.out.println(product.toString()); //Le ponemos  .toString para que nos de toda la infromación		
 			}
 		}
 	}
@@ -508,12 +509,12 @@ public class Shop {
 		return inventory;
 	};
 	  // Get dao 
-    public DaoImplXml getDao() {
+    public DaoImplJaxb getDao() {
         return dao;
     }
     
     // Set dao 
-    public void setDao(DaoImplXml dao) {
+    public void setDao(DaoImplJaxb dao) {
         this.dao = dao;
     }
     public boolean writeInventory(ArrayList<Product> products)throws IOException{

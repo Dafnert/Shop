@@ -19,7 +19,7 @@ public class Amount {
 	     this.value = value;
 	     this.currency = currency;
 	 }
-	 @XmlValue
+	@XmlValue
 	public double getValue() {
 		return value;
 	}
@@ -33,7 +33,11 @@ public class Amount {
 	}
 
 	public void setCurrency(String currency) {
-		this.currency = currency;
+		if("Euro".equals(currency)) {
+			this.currency = "€";
+		}else {
+			this.currency=currency;
+		}
 	}
 
 	@Override

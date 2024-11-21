@@ -26,11 +26,15 @@ public class JaxbMarshaller {
 			e.printStackTrace();
 		}
 	}
-private ProductList createXml(ArrayList<Product> products) {
-
-		for (Product p : products) {
-			System.out.println(p);
-		}
-		return new ProductList(products);
+	private ProductList createXml(ArrayList<Product> products) {
+	   
+	        for (Product p : products) {
+	            System.out.println(p); 
+	        }
+	        
+	        ProductList productList = new ProductList(products);
+	        productList.setTotal(products.size());
+	        
+	    return productList;
 	}
 }
