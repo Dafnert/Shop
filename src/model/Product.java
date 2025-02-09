@@ -1,26 +1,35 @@
 package model;
-import java.util.ArrayList;
-
+import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import model.Amount;
-
+@Entity
+@Table(name="Product")
 @XmlRootElement(name="product")
 @XmlType(propOrder = {"totalProducts", "name","available", "wholesalerPrice","publicPrice", "stock"}) 
 public class Product {
+	@Id
+	@GeneratedValue
 	private int id;
+	@Column
     private String name;
+    @Transient
     private Amount publicPrice;
+    @Transient
     private Amount wholesalerPrice;
+    @Column
     private boolean available = true;
+    @Column
     private int stock;
     private static int totalProducts;
+    @Column
+    private double price;
     
-    static double EXPIRATION_RATE=0.60;
+
+	static double EXPIRATION_RATE=0.60;
     
 	public Product(String name, Amount wholesalerPrice, boolean available, int stock, Amount publicPrice) {
 		super();
@@ -99,7 +108,12 @@ public class Product {
 	public void setTotalProducts(int totalProducts) {
 		Product.totalProducts = totalProducts;
 	}
-
+	  public double getPrice() {
+			return price;
+		}
+		public void setPrice(double price) {
+			this.price = price;
+		}
 
 	public double expire() { //Eliminamos el void y ponemos double porque nos daba error
 		this.publicPrice.setValue(this.publicPrice.getValue()*EXPIRATION_RATE);

@@ -22,6 +22,7 @@ import java.util.Scanner;
 
 import dao.Dao;
 import dao.DaoImplFile;
+import dao.DaoImplHibernate;
 import dao.DaoImplJaxb;
 import dao.DaoImplXml;
 // COPIA
@@ -33,7 +34,8 @@ public class Shop {
 	//private DaoImplFile dao=new DaoImplFile();
 	/*DomWriter y SaxReades*/
 	//private DaoImplXml dao=new DaoImplXml();
-	private DaoImplJaxb dao=new DaoImplJaxb();
+	//private DaoImplJaxb dao=new DaoImplJaxb();
+	private DaoImplHibernate dao=new DaoImplHibernate();
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
 	//Wholesalerprice --> el price al que compra los productos al distribuidor
@@ -92,7 +94,7 @@ public class Shop {
 				break;
 
 			case 3:
-				shop.addStock();
+				//shop.addStock();
 				break;
 
 			case 4:
@@ -112,7 +114,7 @@ public class Shop {
 				shop.showSales();
 				break;
 			case 8: //Añadimos el caso (2)
-				shop.deleteProduct();
+				//shop.deleteProduct();
 			case 9:
 				shop.totalSale(); //Llamamos al método
 				break;
@@ -223,41 +225,44 @@ public class Shop {
 		Amount amount = new Amount(wholesalerPrice); //Llamar a la clase Amount para poder hacer uso del double wholesalerPrice 
 		addProduct(new Product(name, amount, true, stock, new Amount(amount.getValue()*2))); //WholersalerPrice se multiplica por 2 porque el publicPrice es el doble.
 		//Cambiamos el wholesalerPrice por el amount
+		System.out.println(products.toString());
 		
 	}
-	public void deleteProduct() { //Creamos el método para eliminar el producto
-		System.out.println("Introduzca el nombre del producto que quiera eliminar");
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Nombre: ");
-		String name = scanner.nextLine();
-		Product product  = findProduct(name);
+	public void deleteProduct(Product product,int productId) { //Creamos el método para eliminar el producto
+		//System.out.println("Introduzca el nombre del producto que quiera eliminar");
+		//Scanner scanner = new Scanner(System.in);
+		//System.out.print("Nombre: ");
+		//String name = scanner.nextLine();
+		//Product product  = findProduct(name);
 		for (int i = 0; i < inventory.size(); i++) {
-			if (inventory.get(i) != null && inventory.get(i).getName().equalsIgnoreCase(name)) { //Para que sea non Key Sensitive(3)
+			if (inventory.get(i) != null && inventory.get(i).getName().equalsIgnoreCase(null)) { //Para que sea non Key Sensitive(3)
 				inventory.remove(product);
-				System.out.println("Se ha eliminado el producto: " + name);
+				
+				//System.out.println("Se ha eliminado el producto: " + name);
 			}
 		}
-
+		//delete
+		dao.removeProduct(productId);
 	}
 	/**
 	 * add stock for a specific product
 	 */
-	public void addStock() {
-		Scanner scanner = new Scanner(System.in);
+	public void addStock(Product product, int stock) {
+		//Scanner scanner = new Scanner(System.in);
 		System.out.print("Seleccione un nombre de producto: ");
-		String name = scanner.next();
-		Product product = findProduct(name);
+		//String name = scanner.next();
+		//product = findProduct(name);
 
 		if (product != null) {
 			// ask for stock
 			System.out.print("Seleccione la cantidad a añadir: ");
-			int stock = scanner.nextInt();
+			//int stock = scanner.nextInt();
 			// update stock product
-			product.setStock(product.getStock() + stock); //Suma la cantidad que añade al producto (4)
-			System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getStock());
-
+			product.setStock(stock); //Suma la cantidad que añade al producto (4)
+			//System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getStock());
+			dao.updateProduct(product);
 		} else {
-			System.out.println("No se ha encontrado el producto con nombre " + name);
+			//System.out.println("No se ha encontrado el producto con nombre " + name);
 		}
 	}
 
@@ -463,6 +468,7 @@ public class Shop {
 		// numberProducts++;
 		//El cambio para el 1.1
 		inventory.add(product);
+		dao.addProduct(product);
 		numberProducts++;
 	}
 
@@ -509,12 +515,12 @@ public class Shop {
 		return inventory;
 	};
 	  // Get dao 
-    public DaoImplJaxb getDao() {
+    public DaoImplHibernate getDao() {
         return dao;
     }
     
     // Set dao 
-    public void setDao(DaoImplJaxb dao) {
+    public void setDao(DaoImplHibernate dao) {
         this.dao = dao;
     }
     public boolean writeInventory(ArrayList<Product> products)throws IOException{
