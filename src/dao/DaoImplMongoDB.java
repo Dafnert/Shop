@@ -39,4 +39,22 @@ public class DaoImplMongoDB implements Dao {
 		return false;
 	}
 
+	@Override
+	public void updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeProduct(int productId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
