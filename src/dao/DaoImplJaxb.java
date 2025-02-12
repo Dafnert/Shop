@@ -43,5 +43,23 @@ public class DaoImplJaxb implements Dao{
 		(new JaxbMarshaller()).init(products);
 		return true;
 	}
+
+	@Override
+	public void updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeProduct(int productId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
