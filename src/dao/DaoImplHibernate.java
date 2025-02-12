@@ -31,7 +31,7 @@ public class DaoImplHibernate implements Dao {
 	}
 
 	@Override
-	public Employee getEmployee(int employeeId, String password) throws SQLException {
+	public Employee getEmployee(int employeeId, String password)  {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -115,7 +115,7 @@ public class DaoImplHibernate implements Dao {
 	}
 
 	@Override
-	public boolean writeInventory(ArrayList<Product> products) throws IOException {
+	public boolean writeInventory(ArrayList<Product> products) {
 		
 		connect();
 		try {
