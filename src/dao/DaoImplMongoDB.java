@@ -12,11 +12,11 @@ public class DaoImplMongoDB implements Dao {
 	@Override
 	public void connect() throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public Employee getEmployee(int employeeId, String password)  {
+	public Employee getEmployee(int employeeId, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -24,7 +24,7 @@ public class DaoImplMongoDB implements Dao {
 	@Override
 	public void disconnect() throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class DaoImplMongoDB implements Dao {
 	}
 
 	@Override
-	public boolean writeInventory(ArrayList<Product> inventory)  {
+	public boolean writeInventory(ArrayList<Product> inventory) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -42,19 +42,19 @@ public class DaoImplMongoDB implements Dao {
 	@Override
 	public void updateProduct(Product product) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeProduct(int productId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addProduct(Product product) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
