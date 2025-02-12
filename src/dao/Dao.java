@@ -12,18 +12,16 @@ import model.Product;
 
 public interface Dao {
 	
-	public void connect() throws SQLException;
-	
-	public Employee getEmployee(int employeeId, String password) throws SQLException;
-	
+	public void connect() throws SQLException;	
+	public Employee getEmployee(int employeeId, String password) ;
 	public void disconnect() throws SQLException; 
-	
 	public ArrayList<Product> getInventory();
-	
-	public boolean writeInventory(ArrayList<Product> inventory)throws IOException;
 	public void updateProduct(Product product);
 	public void removeProduct(int productId);
 	public void addProduct(Product product);
+	public boolean writeInventory(ArrayList<Product> inventory);
+	
+
 
 	
 }

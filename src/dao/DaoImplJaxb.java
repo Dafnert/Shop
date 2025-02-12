@@ -12,19 +12,19 @@ import model.Product;
 public class DaoImplJaxb implements Dao{
 
 	@Override
-	public void connect() throws SQLException {
+	public void connect()  {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Employee getEmployee(int employeeId, String password) throws SQLException {
+	public Employee getEmployee(int employeeId, String password)  {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void disconnect() throws SQLException {
+	public void disconnect() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -38,7 +38,7 @@ public class DaoImplJaxb implements Dao{
 	}
 
 	@Override
-	public boolean writeInventory(ArrayList<Product> products) throws IOException {
+	public boolean writeInventory(ArrayList<Product> products) {
 		// from java2xml
 		(new JaxbMarshaller()).init(products);
 		return true;

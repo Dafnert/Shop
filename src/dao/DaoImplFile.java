@@ -20,19 +20,19 @@ public class DaoImplFile implements Dao{
 	private ArrayList<Sale> sales;
 	private ArrayList<Product> inventory;
 	@Override
-	public void connect() throws SQLException {
+	public void connect() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Employee getEmployee(int employeeId, String password) throws SQLException {
+	public Employee getEmployee(int employeeId, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void disconnect() throws SQLException {
+	public void disconnect()  {
 		// TODO Auto-generated method stub
 		
 	}
@@ -86,7 +86,7 @@ public class DaoImplFile implements Dao{
 		
 	}*/
 	//we create the method writeInventory for the file write the products
-	public boolean writeInventory(ArrayList<Product> inventory) throws IOException{
+	public boolean writeInventory(ArrayList<Product> inventory){
 	    LocalDate date = LocalDate.now();
 	    try {
 	        File file = new File("files/inventory_" + date + ".txt"); 
