@@ -26,7 +26,7 @@ public class DaoImplXml implements Dao{
 	}
 
 	@Override
-	public Employee getEmployee(int employeeId, String password) throws SQLException {
+	public Employee getEmployee(int employeeId, String password)  {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -59,7 +59,7 @@ public class DaoImplXml implements Dao{
 		return products;
 	
 	}
-    public boolean writeInventory(ArrayList<Product> products) throws IOException {
+    public boolean writeInventory(ArrayList<Product> products) {
 		DomWriter domWriter = new DomWriter();
         try {
         	System.out.println(products.toString());

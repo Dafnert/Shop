@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.jaxb.JaxbMarshaller;
-import dao.jaxb.JaxbUnMarshaller;
 import model.Employee;
 import model.Product;
 
-public class DaoImplJaxb implements Dao{
+public class DaoImplMongoDB implements Dao {
 
 	@Override
-	public void connect()  {
+	public void connect() throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -24,24 +22,21 @@ public class DaoImplJaxb implements Dao{
 	}
 
 	@Override
-	public void disconnect() {
+	public void disconnect() throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public ArrayList<Product> getInventory() {
-		ArrayList<Product> products = new ArrayList<>();
-		// from xml2java
-		products = (new JaxbUnMarshaller()).init();
-		return products;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public boolean writeInventory(ArrayList<Product> products) {
-		// from java2xml
-		(new JaxbMarshaller()).init(products);
-		return true;
+	public boolean writeInventory(ArrayList<Product> inventory)  {
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
+
 }
