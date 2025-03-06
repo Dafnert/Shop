@@ -81,10 +81,6 @@ public class DaoImplFile implements Dao{
 		return files;
 	}
 	
-	/**private void addProduct(Product product) {
-		// TODO Auto-generated method stub
-		
-	}*/
 	//we create the method writeInventory for the file write the products
 	public boolean writeInventory(ArrayList<Product> inventory){
 	    LocalDate date = LocalDate.now();
