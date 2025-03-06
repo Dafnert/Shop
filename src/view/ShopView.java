@@ -13,6 +13,7 @@ import utils.Constants;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -65,7 +66,12 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		setFocusTraversalKeysEnabled(false);
 		
 		
-		shop.loadInventory();
+		try {
+			shop.loadInventory();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 474);
@@ -207,12 +213,13 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 	                openProductView(9,shop);
 	                break;
 	            case "inventory":
-	            	 try {
-	            	        shop.writeInventory(products);
-	            	        JOptionPane.showMessageDialog(this, "Inventario exportado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-	            	    } catch (IOException ex) {
-	            	        JOptionPane.showMessageDialog(this, "Error al exportar inventario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-	            	    }
+	            	try {
+	            	    shop.writeInventory(products);
+	            	    JOptionPane.showMessageDialog(null, "Inventario exportado correctamente", "", JOptionPane.INFORMATION_MESSAGE);
+	            	} catch (IOException e1) {
+	            	    JOptionPane.showMessageDialog(null, "Error al exportar el inventario: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	            	}
+
 	                break;
 	        }	
 	}

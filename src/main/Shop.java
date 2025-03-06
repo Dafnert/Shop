@@ -23,7 +23,9 @@ import java.util.Scanner;
 import dao.Dao;
 import dao.DaoImplFile;
 import dao.DaoImplHibernate;
+import dao.DaoImplJDBC;
 import dao.DaoImplJaxb;
+import dao.DaoImplMongoDB;
 import dao.DaoImplXml;
 // COPIA
 public class Shop {
@@ -35,7 +37,9 @@ public class Shop {
 	/*DomWriter y SaxReades*/
 	//private DaoImplXml dao=new DaoImplXml();
 	//private DaoImplJaxb dao=new DaoImplJaxb();
-	private DaoImplHibernate dao=new DaoImplHibernate();
+	//private DaoImplHibernate dao=new DaoImplHibernate();
+	//private DaoImplMongoDB dao=new DaoImplMongoDB();
+	private DaoImplJDBC dao = new DaoImplJDBC();
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
 	//Wholesalerprice --> el price al que compra los productos al distribuidor
@@ -114,7 +118,7 @@ public class Shop {
 				shop.showSales();
 				break;
 			case 8: //Añadimos el caso (2)
-				//shop.deleteProduct();
+				//shop.deleteProduct(Product, opcion);
 			case 9:
 				shop.totalSale(); //Llamamos al método
 				break;
@@ -150,9 +154,8 @@ public class Shop {
 	/**
 	 * load initial inventory to shop
 	 */
-	public void loadInventory() {	
+	public void loadInventory() throws SQLException {	
 		this.inventory=dao.getInventory();
-		//System.out.println(inventory.toString());
 		
 		/* try {
 	        File file = new File("Files/inputInventory.txt");
@@ -229,18 +232,21 @@ public class Shop {
 		
 	}
 	public void deleteProduct(Product product,int productId) { //Creamos el método para eliminar el producto
-		//System.out.println("Introduzca el nombre del producto que quiera eliminar");
-		//Scanner scanner = new Scanner(System.in);
-		//System.out.print("Nombre: ");
-		//String name = scanner.nextLine();
-		//Product product  = findProduct(name);
+		/*System.out.println("Introduzca el nombre del producto que quiera eliminar");
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Nombre: ");
+		String name = scanner.nextLine();
+		Product products  = findProduct(name);*/
+
+		
 		for (int i = 0; i < inventory.size(); i++) {
-			if (inventory.get(i) != null && inventory.get(i).getName().equalsIgnoreCase(null)) { //Para que sea non Key Sensitive(3)
+			if (inventory.get(i) != null && inventory.get(i).getName().equalsIgnoreCase(product.getName())) { //Para que sea non Key Sensitive(3)
 				inventory.remove(product);
 				
 				//System.out.println("Se ha eliminado el producto: " + name);
 			}
 		}
+		System.out.println(product.getId());
 		//delete
 		dao.removeProduct(productId);
 	}
@@ -249,13 +255,13 @@ public class Shop {
 	 */
 	public void addStock(Product product, int stock) {
 		//Scanner scanner = new Scanner(System.in);
-		System.out.print("Seleccione un nombre de producto: ");
+		//System.out.print("Seleccione un nombre de producto: ");
 		//String name = scanner.next();
 		//product = findProduct(name);
 
 		if (product != null) {
 			// ask for stock
-			System.out.print("Seleccione la cantidad a añadir: ");
+			//System.out.print("Seleccione la cantidad a añadir: ");
 			//int stock = scanner.nextInt();
 			// update stock product
 			product.setStock(stock); //Suma la cantidad que añade al producto (4)
@@ -515,12 +521,12 @@ public class Shop {
 		return inventory;
 	};
 	  // Get dao 
-    public DaoImplHibernate getDao() {
+    public DaoImplJDBC getDao() {
         return dao;
     }
     
     // Set dao 
-    public void setDao(DaoImplHibernate dao) {
+    public void setDao(DaoImplJDBC dao) {
         this.dao = dao;
     }
     public boolean writeInventory(ArrayList<Product> products)throws IOException{
@@ -528,7 +534,7 @@ public class Shop {
     	return dao.writeInventory(inventory);
 		
     }
-    public void readInventrory() {
+    public void readInventrory() throws SQLException {
     	this.setInventory(dao.getInventory());
     }
 

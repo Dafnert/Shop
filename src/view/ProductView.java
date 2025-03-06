@@ -132,9 +132,10 @@ public class ProductView extends JDialog implements ActionListener {
 								String nameProduct = name.getText();
 								// Para que nos busque el nombre del product
 								Product product = shop.findProduct(nameProduct);
-								int productId = product.getId();
+								
 								// Si el producto existe(no es null)
 								if (product != null) {
+									int productId = product.getId();
 									// El invetory le damos el valor de que nos devuelva el inventario
 									inventory = shop.getInventory();
 									// Se eliminará el producto del inventario
@@ -153,18 +154,12 @@ public class ProductView extends JDialog implements ActionListener {
 								}
 							}
 							if (option == Constants.OPTION_EXPORT_INVENTORY) {
-								try {
-									shop.writeInventory(inventory);
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								JOptionPane.showMessageDialog(null, "Export Inventory", "",
-										JOptionPane.INFORMATION_MESSAGE);
-								dispose();
-							} else {
-								JOptionPane.showMessageDialog(null, "	Fail export Inventory", "Error",
-										JOptionPane.ERROR_MESSAGE);
+							    try {
+							        shop.writeInventory(inventory);
+							        JOptionPane.showMessageDialog(null, "Inventario exportado correctamente", "", JOptionPane.INFORMATION_MESSAGE);
+							    } catch (IOException e1) {
+							        JOptionPane.showMessageDialog(null, "Fail export Inventory", "Error", JOptionPane.ERROR_MESSAGE);
+							    }
 							}
 							dispose();
 						}
