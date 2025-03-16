@@ -20,8 +20,4 @@ public interface Dao {
 	public void removeProduct(int productId);
 	public void addProduct(Product product);
 	public boolean writeInventory(ArrayList<Product> inventory);
-	
-
-
-	
 }

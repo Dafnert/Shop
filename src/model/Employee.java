@@ -3,6 +3,7 @@ import java.sql.SQLException;
 
 import dao.Dao;
 import dao.DaoImplJDBC;
+import dao.DaoImplMongoDB;
 import main.Logable;
 public class Employee extends Person implements Logable {
 	
@@ -30,13 +31,9 @@ public class Employee extends Person implements Logable {
 	//Implementamos el metodo login con parametros de entrada que son las variables constantes
 	
 	public boolean login(int user, String password) throws SQLException{
-		dao=new DaoImplJDBC();
-		
-		try {
-			//Se conecta a la base de datos
-			System.out.println("Conectandose a la base de datos");
-			dao.connect();
-			System.out.println("Conectado");
+		dao=new DaoImplMongoDB();
+		dao.connect();
+	System.out.println("connect");
 
 			//Obtenemos la información del Employee
 			System.out.println("Datos:");
@@ -45,24 +42,11 @@ public class Employee extends Person implements Logable {
 				if(employee != null){
 					System.out.println("Employee found");
 					return true;
-				}//else {
-					//return true;
-				//} 
-		}catch (SQLException ex) {
-		System.out.println("ERROR con la BBDD: " + ex.getMessage());
-		}finally {
+				}
          
 			// Disconnect from the database
-            dao.disconnect();
-        
-		}
+            dao.disconnect();	
 		return false;
-	    /**if(user== 123 && password.equalsIgnoreCase("test")) {
-		return true;
-	
-	}else {
-		return false;
-	}*/
 	}
 	
 	//Generamoslos gettes y setters

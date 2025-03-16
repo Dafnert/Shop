@@ -65,13 +65,9 @@ public class ShopView extends JFrame implements KeyListener, ActionListener{
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		
-		
-		try {
+
 			shop.loadInventory();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 474);

@@ -50,6 +50,15 @@ public class Product {
 		super();
 		this.id =++totalProducts;
 	
+	}
+	public Product(String name, Amount wholesalerPrice, boolean available, int stock, int id) {
+		super();
+		this.id = totalProducts+1;
+		this.name = name;
+		this.wholesalerPrice = wholesalerPrice;
+		this.available = available;
+		this.stock = stock;
+		totalProducts++;
 	}; 
 	@XmlAttribute(name="id")
 	public int getId() {

@@ -33,13 +33,7 @@ public class Shop {
 	//private DaoImplFile dao;
 	private ArrayList<Product> inventory; //La arraylist<la clase>
 	private int numberProducts;
-	//private DaoImplFile dao=new DaoImplFile();
-	/*DomWriter y SaxReades*/
-	//private DaoImplXml dao=new DaoImplXml();
-	//private DaoImplJaxb dao=new DaoImplJaxb();
-	//private DaoImplHibernate dao=new DaoImplHibernate();
-	//private DaoImplMongoDB dao=new DaoImplMongoDB();
-	private DaoImplJDBC dao = new DaoImplJDBC();
+	private Dao dao;
 	//private Sale[] sales = new Sale[10]; --> Creamos una array para las ventas 
 	private ArrayList<Sale> sales; //Lo pasamos a una ArrayList 1.2
 	//Wholesalerprice --> el price al que compra los productos al distribuidor
@@ -53,7 +47,7 @@ public class Shop {
 		inventory = new ArrayList<Product>();//La arraylist<la clase>
 		sales = new ArrayList<Sale>();
 		//Assignar a atributo dao un objeto del constructor DaoImplFile
-		
+		this.dao= new DaoImplMongoDB();
 	}
 
 	public static void main(String[] args) throws SQLException, IOException {
@@ -154,7 +148,7 @@ public class Shop {
 	/**
 	 * load initial inventory to shop
 	 */
-	public void loadInventory() throws SQLException {	
+	public void loadInventory()  {	
 		this.inventory=dao.getInventory();
 		
 		/* try {
@@ -520,15 +514,7 @@ public class Shop {
 	public ArrayList<Product> setInventory(ArrayList<Product> arrayList) {
 		return inventory;
 	};
-	  // Get dao 
-    public DaoImplJDBC getDao() {
-        return dao;
-    }
-    
-    // Set dao 
-    public void setDao(DaoImplJDBC dao) {
-        this.dao = dao;
-    }
+
     public boolean writeInventory(ArrayList<Product> products)throws IOException{
     	
     	return dao.writeInventory(inventory);
